@@ -91,8 +91,7 @@ $output_comment_body = function (string $text) use ($query_words, $words_regex):
 		<span class="comment-author"><?= html($comment['name']) ?></span>
 		<span class="comment-email">&lt;<?= html($comment['email']) ?>&gt;</span>
 		прокомментировал(а) запись
-		<span class="comment-post">"<?= html($comment['postTitle']) ?>"</span>
-		<span>:</span>
+		<span class="comment-post">"<?= html($comment['postTitle']) ?>"</span><span>:</span>
 	</div>
 	<div class="comment-body"><?php $output_comment_body($comment['body']); ?></div>
 </div>
