@@ -13,7 +13,7 @@ function require_view(string $view, array $args = []): void {
 
 /// Экранирует специальные символы HTML в `$value`.
 function html(string|int|null $value): string {
-	return htmlspecialchars(strval($value), ENT_QUOTES | ENT_HTML5 | ENT_SUBSTITUTE);
+	return htmlspecialchars(strval($value), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 }
 
 function push_error(string $message): never {

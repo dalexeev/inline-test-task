@@ -2,6 +2,9 @@
 
 final class DB {
 
+/// Формат даты-времени, используемый в БД (MySQL).
+public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+
 private static PDO $pdo;
 
 public static function query(string $query, array $params = []): PDOStatement {
