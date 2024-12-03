@@ -1,0 +1,15 @@
+<?php
+
+// Доступы к базе данных (аргументы для функции `PDO::__construct()`).
+const CONFIG_DB_CREDENTIALS = [
+	'mysql:dbname=inline_test_task;host=localhost', // `$dsn`.
+	'work', // `$username`.
+	'1234', // `$password`.
+];
+
+// Таблица маршрутов (`паттерн => контроллер`).
+const CONFIG_ROUTE_MAP = [
+	'/' => 'main_page',
+	'/comments' => 'comments',
+	'*' => '404',
+];

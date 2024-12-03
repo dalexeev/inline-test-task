@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../main/start.php';
+
+require_once 'models/db.php';
+require_once 'models/tables/comments.php';
+require_once 'models/tables/posts.php';
+
+const POSTS_JSON_URL = 'https://jsonplaceholder.typicode.com/posts';
+const COMMENTS_JSON_URL = 'https://jsonplaceholder.typicode.com/comments';
+
+printf("Загрузка записей из '%s'...\n", POSTS_JSON_URL);
+$posts_json = file_get_contents(POSTS_JSON_URL);
+if ($posts_json === false) {
+	echo "Не удалось загрузить записи.\n";
+	exit(1);
+}
+$posts = json_decode($posts_json, true);
+
+printf("Загрузка комментариев из '%s'...\n", COMMENTS_JSON_URL);
+$comments_json = file_get_contents(COMMENTS_JSON_URL);
+if ($comments_json === false) {
+	echo "Не удалось загрузить комментарии.\n";
+	exit(1);
+}
+$comments = json_decode($comments_json, true);
+
+echo "Импорт записей и комментариев в базу данных...\n";
+DB::beginTransaction();
+PostsTable::insert($posts);
+CommentsTable::insert($comments);
+DB::commit();
+
+echo sprintf(
+	"Загружено %d %s и %d %s.\n",
+	count($posts),
+	get_plural(count($posts), 'запись', 'записи', 'записей'),
+	count($comments),
+	get_plural(count($comments), 'комментарий', 'комментария', 'комментариев'),
+);
