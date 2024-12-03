@@ -20,7 +20,7 @@ foreach ($query_words as $query_word) {
 	$query_words_escaped[] = preg_quote($query_word, '/');
 }
 
-$words_regex = '/' . implode('|', $query_words_escaped) . '/iu';
+$words_regex = '/(?<![\pL\d])(?:' . implode('|', $query_words_escaped) . ')/iu';
 
 $output_comment_body = function (string $text) use ($query_words, $words_regex): void {
 	// NOTE: Мёртвый код. Либо список комментариев пуст и данная функция не вызывается,
